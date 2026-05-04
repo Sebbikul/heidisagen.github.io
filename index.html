@@ -479,7 +479,7 @@ function renderQna(userContribution = []) {
     const el = document.createElement("div");
     el.className = `qna-item ${item.commentType?.toLowerCase() === "question" ? "question" : ""}`;
     el.innerHTML = `
-      <div class="qna-author">${item.name || "Anonym"} ${item.commentType === "Question" ? "spurte:" : "kommenterte:"}</div>
+      <div class="qna-author">${item.name || "Anonym"} ${item.commentType === "Question" ? "spurte:" : "svarte:"}</div>
       <div class="qna-text">${item.comment || ""}</div>
     `;
     wrapper.appendChild(el);
