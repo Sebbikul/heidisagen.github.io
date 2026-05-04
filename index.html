@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
-  <title>Drapet på Heidi Sagen
-</title>
+  <title>Drapet på Heidi Sagen</title>
   <style>
     :root {
       --bg: #f8f9fc;
@@ -295,6 +294,7 @@
     </div>
     <h1>Drapet på Heidi Sagen</h1>
     <div class="last-update" id="lastUpdate">
+      Sist oppdatert: <span class="last-update-time">aldri</span>
     </div>
     <div class="credit">
       Laget av Sebbi 
@@ -479,7 +479,7 @@ function renderQna(userContribution = []) {
     const el = document.createElement("div");
     el.className = `qna-item ${item.commentType?.toLowerCase() === "question" ? "question" : ""}`;
     el.innerHTML = `
-      <div class="qna-author">${item.name || "Anonym"} ${item.commentType === "Question" ? "spurte:" : "svarte:"}</div>
+      <div class="qna-author">${item.name || "Anonym"} ${item.commentType === "Question" ? "spurte:" : "kommenterte:"}</div>
       <div class="qna-text">${item.comment || ""}</div>
     `;
     wrapper.appendChild(el);
@@ -554,6 +554,7 @@ async function loadMore() {
 
 async function checkForNew() {
   const checkTime = new Date().toLocaleTimeString("no-NO");
+  lastUpdateEl.innerHTML = `Sist oppdatert: <span class="last-update-time">${checkTime}</span> (oppdateres fra Hamar Arbeiderblad hvert 30. sekund)`;
 
   try {
     const result = await fetchBatch(0);
@@ -587,6 +588,8 @@ async function init() {
 moreButton.addEventListener('click', loadMore);
 
 init();
+setInterval(checkForNew, 30000);
+setInterval(updateTimeAgo, 20000);
 </script>
 </body>
 </html>
